@@ -77,4 +77,4 @@ Getting the weights
 ### Sol:
 * --resize_factor: larger than 1 (eg. 10, 120, 720)
 * 
-
+100,300,200,400
