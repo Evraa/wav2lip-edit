@@ -1,5 +1,5 @@
 librosa==0.7.0
 numpy
-opencv-python==4.1.0.25
+opencv-python
 tqdm==4.45.0
 numba==0.48
