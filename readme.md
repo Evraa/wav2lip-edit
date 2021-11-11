@@ -15,10 +15,16 @@
 ```
 * Install requirements:
 ```shell
-    $ pip install -r requirements_cuda.txt
+    $ pip install -r requirements_mod.txt
 ```
-> Make sure that opencv-python is installed properlly.
+> NOTE: these reqs are modified. To be compatible with EC2
 
+> Also, make sure that opencv-python is installed properlly.
+
+* Install torch
+```shell
+    $ pip install torch==1.8.0+cu111 torchvision==0.9.0+cu111 torchaudio==0.8.0 -f https://download.pytorch.org/whl/torch_stable.html
+```
 ## 2. Download models
 
 * Download `s3fd` model for face detection **(86 MB)**
