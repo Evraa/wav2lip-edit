@@ -62,3 +62,19 @@ Getting the weights
 ```shell
     $ python inference.py --checkpoint_path checkpoints/wav2lip_gan.pth --face "../sample_data/input_vid.mp4" --audio "../sample_data/input_audio.wav"
 ```
+
+
+# Issues that come along the way ya zmeely
+
+## Image too big!
+```python3
+    RuntimeError: CUDA error: an illegal memory access was encountered
+    
+    AND
+
+    RuntimeError: Image too big to run face detection on GPU. Please use the --resize_factor argument
+```
+### Sol:
+* --resize_factor: larger than 1 (eg. 10, 120, 720)
+* 
+
