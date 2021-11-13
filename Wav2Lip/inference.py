@@ -181,6 +181,7 @@ def datagen(frames, mels):
 
 mel_step_size = 16
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
+device = 'cpu'
 print('Using {} for inference.'.format(device))
 
 def _load(checkpoint_path):
@@ -308,7 +309,7 @@ def main():
 	print ("EV >> Detecting faces...")
 	gen = datagen(full_frames.copy(), mel_chunks)
 	print ("EV >> Finished detecting faces...")
-	device = 'cpu'
+
 	for i, (img_batch, mel_batch, frames, coords) in enumerate(tqdm(gen, 
 											total=int(np.ceil(float(len(mel_chunks))/batch_size)))):
 		if i == 0:
