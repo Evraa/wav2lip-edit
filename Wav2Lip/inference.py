@@ -23,7 +23,7 @@ parser.add_argument('--outfile', type=str, help='Video path to save result. See 
 parser.add_argument('--static', type=bool, 
 					help='If True, then use only first video frame for inference', default=False)
 parser.add_argument('--fps', type=float, help='Can be specified only if input is a static image (default: 25)', 
-					default=5., required=False)
+					default=25., required=False)
 
 parser.add_argument('--pads', nargs='+', type=int, default=[0, 10, 0, 0], 
 					help='Padding (top, bottom, left, right). Please adjust to include chin at least')
@@ -200,6 +200,9 @@ def main():
 
 		full_frames = []
 		one_print = False
+		# video is 135 seconds .. running on 1fps ..
+		# I need 1/25 frame
+		counter = 0
 		while 1:
 			still_reading, frame = video_stream.read()
 			if not one_print:
@@ -209,7 +212,7 @@ def main():
 				video_stream.release()
 				print ("EV>> End of rendering.")
 				break
-
+			
 			if args.resize_factor > 1:
 				frame = cv2.resize(frame, (frame.shape[1]//args.resize_factor, frame.shape[0]//args.resize_factor))
 				if not one_print:
@@ -227,8 +230,10 @@ def main():
 			if y2 == -1: y2 = frame.shape[0]
 
 			frame = frame[y1:y2, x1:x2]
-
-			full_frames.append(frame)
+			if counter%25 == 0:
+				full_frames.append(frame)
+			
+			counter += 1
 			one_print = True
 
 	print ("Number of frames available for inference: "+str(len(full_frames)))
