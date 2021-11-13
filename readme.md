@@ -80,7 +80,7 @@ Getting the weights
     - If image is still big, same error will occur, if image is very tiny .. another error will occur x')
 * Using a bounded box (semi-success)
     - Needed to be tuned exactly on the face, otherwise it will produce awful results.
-* Runnin on cpu (worked nut very slow)
+* Runnin on cpu (worked nut very slow - 17 s/it - it=1 img (no batching in cpu))
     - Takes up to one hour to predect faces on a 120 seconds video with 25 fps.
 * CPU with fewer fps (5 fps)
     - Takes up to 15 mins. Results are ..

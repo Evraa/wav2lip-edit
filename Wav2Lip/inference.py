@@ -95,6 +95,7 @@ def face_detect(images):
 		face_exist = True
 		if rect is None:
 			empty_img_path  = f"temp/faulty_frame_{id}.jpg"
+			id += 1
 			cv2.imwrite(empty_img_path, image) # check this frame where the face was not detected.
 			face_exist = False
 			# raise ValueError('Face not detected! Ensure the video contains a face in all the frames.')
@@ -296,7 +297,7 @@ def main():
 											total=int(np.ceil(float(len(mel_chunks))/batch_size)))):
 		if i == 0:
 			model = load_model(args.checkpoint_path)
-			print ("Model loaded")
+			print ("wav2lip Model loaded")
 
 			frame_h, frame_w = full_frames[0].shape[:-1]
 			out = cv2.VideoWriter('temp/result.avi', 
