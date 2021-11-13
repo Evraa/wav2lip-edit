@@ -135,7 +135,7 @@ def datagen(frames, mels):
 		try:
 			if not os.path.exists("box_check"):
 				os.mkdir("box_check")
-			frame_with_box = cv2.rectangle(frames[0], (y1,x1), (y2,x2), (255,255,0), linethickness=4)
+			frame_with_box = cv2.rectangle(frames[0], (y1,x1), (y2,x2), (255,255,0),4)
 			save_path = f"box_check/check_1.jpg"
 			cv2.imwrite(save_path, frame_with_box) 
 			print ("EV success: stored the image.")
