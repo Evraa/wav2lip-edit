@@ -308,7 +308,7 @@ def main():
 	print ("EV >> Detecting faces...")
 	gen = datagen(full_frames.copy(), mel_chunks)
 	print ("EV >> Finished detecting faces...")
-	
+	device = 'cpu'
 	for i, (img_batch, mel_batch, frames, coords) in enumerate(tqdm(gen, 
 											total=int(np.ceil(float(len(mel_chunks))/batch_size)))):
 		if i == 0:
