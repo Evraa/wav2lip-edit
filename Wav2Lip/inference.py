@@ -340,7 +340,7 @@ def main():
 			y1, y2, x1, x2 = c
 			print (f"coords: {y1, y2, x1, x2}")
 			p = cv2.resize(p.astype(np.uint8), (x2 - x1, y2 - y1))
-
+			print(f"p shape: {p.shape}")
 			f[y1:y2, x1:x2] = p
 			out.write(f)
 
