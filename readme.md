@@ -70,7 +70,7 @@ Getting the weights
 ```python3
     RuntimeError: CUDA error: an illegal memory access was encountered
     
-    AND
+    Then..
 
     RuntimeError: Image too big to run face detection on GPU. Please use the --resize_factor argument
 ```
@@ -78,3 +78,20 @@ Getting the weights
 * --resize_factor: larger than 1 (eg. 10, 120, 720)
 * 
 100,300,200,400
+
+## Can't find temp/temp.wav!
+```python3
+    RuntimeError: Error opening 'temp/temp.wav': System error.
+
+    Then..
+
+    FileNotFoundError: [Errno 2] No such file or directory: 'temp/temp.wav'
+```
+
+### Sol:
+* reinstalling ffmpeg (failed)
+    ```shell
+        $ sudo apt-get install ffmpeg  
+    ```
+* executing within `Wav2lip` directory (success)
+    The problem is that I ran the `inference.py` file from another directory. It was a relative path error, not a package one.

@@ -68,7 +68,7 @@ def get_smoothened_boxes(boxes, T):
 def face_detect(images):
 	print (f"EV>> device used {device}")
 	detector = face_detection.FaceAlignment(face_detection.LandmarksType._2D, 
-											flip_input=False, device=device)
+											flip_input=False, device='cpu')
 
 	print ("EV >> Loaded detector..")
 	batch_size = args.face_det_batch_size
