@@ -205,11 +205,13 @@ def main():
 		counter = 0
 		
 		print ("Please specify the fps you want your video to be renedered at.. (max. 25)")
-		val = int(input ("fps: "))
-		while not isinstance(val, int) or val>25:
-			print ("Please enter an int. less than 25 and greater than 0")
-			val = int(input ("fps: "))
-
+		val = None
+		while not isinstance(val, int) or val>25 or val<1:
+			try:
+				val = int(input ("fps: "))
+			except:
+				print ("Please enter an int. less than 25 and greater than 0")
+			
 		while 1:
 			still_reading, frame = video_stream.read()
 			if not one_print:
