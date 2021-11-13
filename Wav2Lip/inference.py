@@ -66,9 +66,11 @@ def get_smoothened_boxes(boxes, T):
 	return boxes
 
 def face_detect(images):
+	print (f"EV>> device used {device}")
 	detector = face_detection.FaceAlignment(face_detection.LandmarksType._2D, 
 											flip_input=False, device=device)
 
+	print ("EV >> Loaded detector..")
 	batch_size = args.face_det_batch_size
 	
 	while 1:
@@ -116,7 +118,8 @@ def datagen(frames, mels):
 	else:
 		print('Using the specified bounding box instead of face detection...')
 		y1, y2, x1, x2 = args.box
-		face_det_results = [[f[y1: y2, x1:x2], (y1, y2, x1, x2)] for f in frames]
+		print (f"EV>> box specs {y1, y2, x1, x2}")
+		face_det_results = [[ f[y1: y2, x1:x2], (y1, y2, x1, x2) ] for f in frames]
 
 	for i, m in enumerate(mels):
 		idx = 0 if args.static else i%len(frames)
@@ -185,32 +188,48 @@ def main():
 	elif args.face.split('.')[1] in ['jpg', 'png', 'jpeg']:
 		full_frames = [cv2.imread(args.face)]
 		fps = args.fps
+		print (f"EV >>> You inserted an image, fps = {fps} !")
+		print (f"EV >> No. of frames? {len(full_frames)} \t shape of them: {full_frames[0].shape}")
 
 	else:
 		video_stream = cv2.VideoCapture(args.face)
 		fps = video_stream.get(cv2.CAP_PROP_FPS)
+		print (f"EV >>> You inserted a video, fps = {fps} !")
 
 		print('Reading video frames...')
 
 		full_frames = []
+		one_print = False
 		while 1:
 			still_reading, frame = video_stream.read()
+			if not one_print:
+				print (f"EV >> shape of a frame: {frame.shape}")
+
 			if not still_reading:
 				video_stream.release()
+				print ("EV>> End of rendering.")
 				break
+
 			if args.resize_factor > 1:
 				frame = cv2.resize(frame, (frame.shape[1]//args.resize_factor, frame.shape[0]//args.resize_factor))
+				if not one_print:
+					print (f"EV>> Resizing with factor: {args.resize_factor}")
+					print (f"EV>> New shape: {frame.shape}")
 
 			if args.rotate:
 				frame = cv2.rotate(frame, cv2.cv2.ROTATE_90_CLOCKWISE)
 
 			y1, y2, x1, x2 = args.crop
+			if not one_print:
+				print (f"EV>> Crop dims: {y1, y2, x1, x2}")
+
 			if x2 == -1: x2 = frame.shape[1]
 			if y2 == -1: y2 = frame.shape[0]
 
 			frame = frame[y1:y2, x1:x2]
 
 			full_frames.append(frame)
+			one_print = True
 
 	print ("Number of frames available for inference: "+str(len(full_frames)))
 
@@ -223,7 +242,7 @@ def main():
 
 	wav = audio.load_wav(args.audio, 16000)
 	mel = audio.melspectrogram(wav)
-	print(mel.shape)
+	print(f"EV>> mel.shape: {mel.shape}")
 
 	if np.isnan(mel.reshape(-1)).sum() > 0:
 		raise ValueError('Mel contains nan! Using a TTS voice? Add a small epsilon noise to the wav file and try again')
@@ -244,8 +263,11 @@ def main():
 	full_frames = full_frames[:len(mel_chunks)]
 
 	batch_size = args.wav2lip_batch_size
-	gen = datagen(full_frames.copy(), mel_chunks)
 
+	print ("EV >> Detecting faces...")
+	gen = datagen(full_frames.copy(), mel_chunks)
+	print ("EV >> Finished detecting faces...")
+	
 	for i, (img_batch, mel_batch, frames, coords) in enumerate(tqdm(gen, 
 											total=int(np.ceil(float(len(mel_chunks))/batch_size)))):
 		if i == 0:
