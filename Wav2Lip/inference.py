@@ -215,9 +215,17 @@ def main():
 		print (f"EV >> No. of frames? {len(full_frames)} \t shape of them: {full_frames[0].shape}")
 
 		if args.resize_factor > 1:
-			frame = cv2.resize(full_frames[0], (full_frames[0].shape[1]//args.resize_factor, full_frames[0].shape[0]//args.resize_factor))
+			full_frames[0] = cv2.resize(full_frames[0], (full_frames[0].shape[1]//args.resize_factor, full_frames[0].shape[0]//args.resize_factor))
 			print (f"EV>> Resizing with factor: {args.resize_factor}")
-			print (f"EV>> New shape: {frame.shape}")
+			print (f"EV>> New shape: {full_frames[0].shape}")
+		
+		y1, y2, x1, x2 = args.crop
+		print (f"EV>> Crop dims: {y1, y2, x1, x2}")
+
+		if x2 == -1: x2 = full_frames[0].shape[1]
+		if y2 == -1: y2 = full_frames[0].shape[0]
+
+		full_frames[0] = full_frames[0][y1:y2, x1:x2]
 
 	else:
 		video_stream = cv2.VideoCapture(args.face)
