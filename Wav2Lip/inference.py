@@ -87,6 +87,7 @@ def face_detect(images):
 		break
 
 	results = []
+	images_new = []
 	pady1, pady2, padx1, padx2 = args.pads
 	for rect, image in zip(predictions, images):
 		# just ignore non-faces images
@@ -103,7 +104,11 @@ def face_detect(images):
 		x2 = min(image.shape[1], rect[2] + padx2)
 		if face_exist:
 			results.append([x1, y1, x2, y2])
+			images_new.append(image)
 
+	if len(results) == 0:
+		raise ValueError(f'Face not detected! On any of the {len(images)} frames')
+	images = images_new
 	boxes = np.array(results)
 	if not args.nosmooth: boxes = get_smoothened_boxes(boxes, T=5)
 	results = [[image[y1: y2, x1:x2], (y1, y2, x1, x2)] for image, (x1, y1, x2, y2) in zip(images, boxes)]
