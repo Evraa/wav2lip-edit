@@ -203,6 +203,13 @@ def main():
 		# video is 135 seconds .. running on 1fps ..
 		# I need 1/25 frame
 		counter = 0
+		
+		print ("Please specify the fps you want your video to be renedered at.. (max. 25)")
+		val = int(input ("fps: "))
+		while not isinstance(val, int) or val>25:
+			print ("Please enter an int. less than 25 and greater than 0")
+			val = int(input ("fps: "))
+
 		while 1:
 			still_reading, frame = video_stream.read()
 			if not one_print:
@@ -230,7 +237,8 @@ def main():
 			if y2 == -1: y2 = frame.shape[0]
 
 			frame = frame[y1:y2, x1:x2]
-			if counter%25 == 0:
+
+			if counter%int(25/val) == 0:
 				full_frames.append(frame)
 			
 			counter += 1

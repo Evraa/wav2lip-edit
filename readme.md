@@ -84,7 +84,8 @@ Getting the weights
     - Takes up to one hour to predect faces on a 120 seconds video with 25 fps.
 * CPU with fewer fps (5 fps)
     - Takes up to 15 mins. Results are ..
-
+    - Problem is that the argument `fps` is kinda useless, to adjust the videos fps .. you need to modify it manually. This version
+        of the code is modified, it will ask you for the fps while running.
 
 ## Can't find temp/temp.wav!
 ```python3
