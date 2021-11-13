@@ -226,9 +226,7 @@ def main():
 		if y2 == -1: y2 = full_frames[0].shape[0]
 
 		full_frames[0] = full_frames[0][y1:y2, x1:x2]
-		y1, y2, x1, x2 = 0, (y2-y1), 0, (x2-x1)
-		print (f"full frame 0[] shape: {full_frames[0].shape}")
-		print (f"hard dims = {y1,y2,x1,x2}")
+		y1, y2, x1, x2 = 0, full_frames[0].shape[0], 0, full_frames[0].shape[1]
 
 	else:
 		video_stream = cv2.VideoCapture(args.face)
@@ -340,6 +338,7 @@ def main():
 		
 		for p, f, c in zip(pred, frames, coords):
 			y1, y2, x1, x2 = c
+			print (f"coords: {y1, y2, x1, x2}")
 			p = cv2.resize(p.astype(np.uint8), (x2 - x1, y2 - y1))
 
 			f[y1:y2, x1:x2] = p
