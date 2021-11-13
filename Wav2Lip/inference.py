@@ -226,6 +226,9 @@ def main():
 		if y2 == -1: y2 = full_frames[0].shape[0]
 
 		full_frames[0] = full_frames[0][y1:y2, x1:x2]
+		y1, y2, x1, x2 = 0, (y2-y1), 0, (x2-x1)
+		print (f"full frame 0[] shape: {full_frames[0].shape}")
+		print (f"hard dims = {y1,y2,x1,x2}")
 
 	else:
 		video_stream = cv2.VideoCapture(args.face)
