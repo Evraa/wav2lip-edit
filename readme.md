@@ -115,3 +115,4 @@ Getting the weights
 ### Sol:
 * Try modifying the code and list index length if you want to.
 * Use an image instead of a video. (Works)
+
