@@ -102,3 +102,16 @@ Getting the weights
     ```
 * executing within `Wav2lip` directory (success)
     The problem is that I ran the `inference.py` file from another directory. It was a relative path error, not a package one.
+
+
+## Limits
+> All results are currently limited to (utmost) 480p resolution and will be cropped to max. 20s to minimize compute latency
+
+### Sol:
+
+## Unnecessary termination!
+    If One frame doesn't contain an image, the whole process is discarded.
+
+### Sol:
+* Try modifying the code and list index length if you want to.
+* Use an image instead of a video. (Works)

@@ -92,22 +92,22 @@ def face_detect(images):
 	id = 0
 	for rect, image in zip(predictions, images):
 		# just ignore non-faces images
-		face_exist = True
+		# face_exist = True
 		if rect is None:
 			empty_img_path  = f"temp/faulty_frame_{id}.jpg"
 			id += 1
 			cv2.imwrite(empty_img_path, image) # check this frame where the face was not detected.
-			face_exist = False
-			# raise ValueError('Face not detected! Ensure the video contains a face in all the frames.')
-			print ("EV Raised>> Face not detected! Ensure the video contains a face in all the frames.")
+			# face_exist = False
+			raise ValueError('Face not detected! Ensure the video contains a face in all the frames.')
+			# print ("EV Raised>> Face not detected! Ensure the video contains a face in all the frames.")
 
-		if face_exist:
-			y1 = max(0, rect[1] - pady1)
-			y2 = min(image.shape[0], rect[3] + pady2)
-			x1 = max(0, rect[0] - padx1)
-			x2 = min(image.shape[1], rect[2] + padx2)
-			results.append([x1, y1, x2, y2])
-			images_new.append(image)
+		# if face_exist:
+		y1 = max(0, rect[1] - pady1)
+		y2 = min(image.shape[0], rect[3] + pady2)
+		x1 = max(0, rect[0] - padx1)
+		x2 = min(image.shape[1], rect[2] + padx2)
+		results.append([x1, y1, x2, y2])
+		images_new.append(image)
 
 	if len(results) == 0:
 		raise ValueError(f'Face not detected! On any of the {len(images)} frames')
