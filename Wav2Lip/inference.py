@@ -200,10 +200,7 @@ def main():
 
 		full_frames = []
 		one_print = False
-		# video is 135 seconds .. running on 1fps ..
-		# I need 1/25 frame
-		counter = 0
-		
+		# Manually handle the fps of videos
 		print ("Please specify the fps you want your video to be renedered at.. (max. 25)")
 		val = None
 		while not isinstance(val, int) or val>25 or val<1:
@@ -211,6 +208,7 @@ def main():
 				val = int(input ("fps: "))
 			except:
 				print ("Please enter an int. less than 25 and greater than 0")
+		counter = 0
 			
 		while 1:
 			still_reading, frame = video_stream.read()
