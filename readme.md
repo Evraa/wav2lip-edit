@@ -75,9 +75,16 @@ Getting the weights
     RuntimeError: Image too big to run face detection on GPU. Please use the --resize_factor argument
 ```
 ### Sol:
-* --resize_factor: larger than 1 (eg. 10, 120, 720)
-* 
-100,300,200,400
+* --resize_factor: larger than 1 (eg. 2, 10, 100):
+    - Doesn't always work .. needs a lot of trial & error based on your video aspects.
+    - If image is still big, same error will occur, if image is very tiny .. another error will occur x')
+* Using a bounded box (semi-success)
+    - Needed to be tuned exactly on the face, otherwise it will produce awful results.
+* Runnin on cpu (worked nut very slow)
+    - Takes up to one hour to predect faces on a 120 seconds video with 25 fps.
+* CPU with fewer fps (5 fps)
+    - Takes up to 15 mins. Results are ..
+
 
 ## Can't find temp/temp.wav!
 ```python3
@@ -87,7 +94,6 @@ Getting the weights
 
     FileNotFoundError: [Errno 2] No such file or directory: 'temp/temp.wav'
 ```
-
 ### Sol:
 * reinstalling ffmpeg (failed)
     ```shell
