@@ -203,6 +203,11 @@ def main():
 		print (f"EV >>> You inserted an image, fps = {fps} !")
 		print (f"EV >> No. of frames? {len(full_frames)} \t shape of them: {full_frames[0].shape}")
 
+		if args.resize_factor > 1:
+			frame = cv2.resize(full_frames[0], (full_frames[0].shape[1]//args.resize_factor, full_frames[0].shape[0]//args.resize_factor))
+			print (f"EV>> Resizing with factor: {args.resize_factor}")
+			print (f"EV>> New shape: {frame.shape}")
+
 	else:
 		video_stream = cv2.VideoCapture(args.face)
 		fps = video_stream.get(cv2.CAP_PROP_FPS)
