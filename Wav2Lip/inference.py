@@ -139,8 +139,9 @@ def datagen(frames, mels):
 			save_path = f"box_check/check_1.jpg"
 			cv2.imwrite(save_path, frame_with_box) 
 			print ("EV success: stored the image.")
-		except:
+		except Exception as e:
 			print ("EV error: couldn't stroe the image with box on it")
+			print (f"Error: {e}")
 		face_det_results = [[ f[y1: y2, x1:x2], (y1, y2, x1, x2) ] for f in frames]
 
 	for i, m in enumerate(mels):
