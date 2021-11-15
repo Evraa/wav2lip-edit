@@ -65,6 +65,14 @@ Getting the weights
     $ python inference.py --checkpoint_path checkpoints/wav2lip_gan.pth --face "../sample_data/input_vid.mp4" --audio "../sample_data/input_audio.wav"
 ```
 
+### Advanced
+> You may use parameters provided by the authors such as --box, --nosmoot ..etc. We'll discuss some of them in the following subsection:
+
+* *--box:* To exclude the `s3fd` face detector model and manually locate the face within the video/image. Works better in case of images to save time. But authors forgot to implement it for images, so I did it in the modified version in this repo.
+* *--crop:* To crop the image and work on a smaller scale.
+* *--nosmooth:* Proved to show better results. Recommended.
+* *--fps:* Doesn't provide its intended job, so I implemented it within the code.
+* *--resize_factor:* Since modek is trained on small scale images, and produce at most 512*512 videos, so scalling down is required for HD images/videos. This paramtere is a number larger than one to divide width and length on.
 
 # Issues that come along the way ya zmeely
 
@@ -88,6 +96,8 @@ Getting the weights
     - Takes up to 15 mins. Results are ..
     - Problem is that the argument `fps` is kinda useless, to adjust the videos fps .. you need to modify it manually. This version
         of the code is modified, it will ask you for the fps while running.
+* Run on smaller images (works - bad results/pixled)
+    - I guess the limit is 512*512!
 
 ## Can't find temp/temp.wav!
 ```python3
@@ -107,9 +117,10 @@ Getting the weights
 
 
 ## Limits
-> All results are currently limited to (utmost) 480p resolution and will be cropped to max. 20s to minimize compute latency
+> *"All results are currently limited to (utmost) 480p resolution and will be cropped to max. 20s to minimize compute latency"* ~said the author.
 
 ### Sol:
+* Ask the authors for HD model. They did not release it.
 
 ## Unnecessary termination!
     If One frame doesn't contain an image, the whole process is discarded.
@@ -117,6 +128,12 @@ Getting the weights
 ### Sol:
 * Try modifying the code and list index length if you want to.
 * Use an image instead of a video. (Works)
+
+# Results:
+
+
+---
+---
 
 # Upgrades
 
@@ -129,7 +146,7 @@ Wav2lip is one of these projects, notice that they are implementing the executio
 
 ### How to run
 * Follow the same instructions provided above.
-* Install PaddlePaddle [follow here](https://github.com/PaddlePaddle/PaddleGAN/blob/develop/docs/zh_CN/install.md)
+* Install PaddlePaddle [follow here for more](https://github.com/PaddlePaddle/PaddleGAN/blob/develop/docs/zh_CN/install.md)
 ```shell
     # CUDA10.1
     $ python -m pip install paddlepaddle-gpu==2.1.0.post101 -f https://mirror.baidu.com/pypi/simple
@@ -151,7 +168,7 @@ Wav2lip is one of these projects, notice that they are implementing the executio
 
 ## Issues On PaddleGAN wav2lip
 
-### numpy package
+## numpy package
 ```python3 
     RuntimeError: module compiled against API version 0xe but this version of numpy is 0xd
 ```
@@ -161,6 +178,27 @@ Wav2lip is one of these projects, notice that they are implementing the executio
     $ pip install numpy --upgrade
 ```
 
-conda install -c anaconda cudnn
+## Issues with cuDNN
 
-python3 tools/wav2lip.py  --face ../docs/imgs/mona7s.mp4 --audio ../docs/imgs/guangquan.m4a  --outfile pp_guangquan_mona7s.mp4 
+### Sol:
+1. Run on google colab instead (provided with the code).
+2. Run on cpu
+> Pass the parameter `--cpu` to the above and will work but slow (takes up to 40 mins for 5 sec videos).
+3. Use docker image (didn't try it)
+
+## Some helpful commands that might work for you
+
+* To install cuDNN on conda and check it:
+```shell
+    conda install -c anaconda cudnn
+    conda list cudnn
+```
+
+# Results
+
+## Without face enhancement:
+
+
+
+
+## With face enhancement:
