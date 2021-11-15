@@ -198,7 +198,10 @@ Wav2lip is one of these projects, notice that they are implementing the executio
 
 ## Without face enhancement:
 
-https://user-images.githubusercontent.com/41262384/141814042-806fdf07-ac36-4d8d-9c34-34e369f0365f.mp4
+
+
+https://user-images.githubusercontent.com/41262384/141814218-36dc8fc7-d2d5-4a03-85de-ec12114d4677.mp4
+
 
 ## With face enhancement:
 
