@@ -45,10 +45,12 @@ Getting the weights
 | Expert Discriminator  | Weights of the expert discriminator | [lipsync_expert.pth **(188 MB)**](https://iiitaphyd-my.sharepoint.com/:u:/g/personal/radrabha_m_research_iiit_ac_in/EQRvmiZg-HRAjvI6zqN9eTEBP74KefynCwPWVmF57l-AYA?e=ZRPHKP) |
 | Visual Quality Discriminator  | Weights of the visual disc trained in a GAN setup | [visual_quality_disc.pth **(162 MB)**](https://iiitaphyd-my.sharepoint.com/:u:/g/personal/radrabha_m_research_iiit_ac_in/EQVqH88dTm1HjlK11eNba5gBbn15WMS0B0EZbDBttqrqkg?e=ic0ljo) |
 
-> To download any of them (eg. wav2lip_gan):
+> To download any of them (eg. wav2lip_gan): You can manually use the link, and make sure to place it at ./checkpoints/
 
+> If you want to download it using a script. I provided a script `dl.py` very easy and simple to use and read.
 ```shell
-    $ wget "https://iiitaphyd-my.sharepoint.com/:u:/g/personal/radrabha_m_research_iiit_ac_in/EdjI7bZlgApMqsVoEUUXpLsBxqXbn5z8VTmoxp55YNDcIA?e=n9ljGW" -O "Wav2Lip/content/wav2lip_gan.pth"
+    $ pip install gdrive
+    $ python3 dl.py
 ```
 
 ## 3. Place data
