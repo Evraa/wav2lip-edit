@@ -130,14 +130,14 @@ Getting the weights
 * Use an image instead of a video. (Works)
 
 # Results:
-
+https://user-images.githubusercontent.com/41262384/141815613-bd70beaf-edf7-43c6-823e-d1808d7b9dbf.mp4
 
 ---
 ---
 
 # Upgrades
 
-## Running PaddleGAN
+## PaddleGAN
 
 PaddleGAN is a very comprehensive api consists of various generative models, collecting projects from different sources.
 Wav2lip is one of these projects, notice that they are implementing the execution of the same wav2lip [link](https://github.com/Rudrabha/Wav2Lip.git), in addition to the feature of face enhancement, that paddlegan produce [here](https://github.com/PaddlePaddle/PaddleGAN/blob/develop/ppgan/faceutils/face_enhancement/face_enhance.py).
@@ -200,5 +200,9 @@ Wav2lip is one of these projects, notice that they are implementing the executio
 
 https://user-images.githubusercontent.com/41262384/141814218-36dc8fc7-d2d5-4a03-85de-ec12114d4677.mp4
 
-## With face enhancement:
+## With f
+
+https://user-images.githubusercontent.com/41262384/141815579-4e6ec591-890d-486d-b126-8b6f7362637b.mp4
+
+ace enhancement:
 
