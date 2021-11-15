@@ -3,7 +3,7 @@
 ## 1. Setup
 * Create an environment with cuda v 11.4+ and cuDNN v 8+, better with anaconda, recent versions are needed for TF.
 ```shell
-    $ conda create -n deepfacelab -c main python=3.8 cudnn=8.6 cudatoolkit=11.4 -c conda-forge
+    $ conda create -n wav2lip -c main python=3.8 cudnn=8.0 cudatoolkit=11.0 -c conda-forge
 ```
 * Clone the repo
 ```shell
@@ -116,3 +116,49 @@ Getting the weights
 * Try modifying the code and list index length if you want to.
 * Use an image instead of a video. (Works)
 
+# Upgrades
+
+## Running PaddleGAN
+
+PaddleGAN is a very comprehensive api consists of various generative models, collecting projects from different sources.
+Wav2lip is one of these projects, notice that they are implementing the execution of the same wav2lip [link](https://github.com/Rudrabha/Wav2Lip.git), in addition to the feature of face enhancement, that paddlegan produce [here](https://github.com/PaddlePaddle/PaddleGAN/blob/develop/ppgan/faceutils/face_enhancement/face_enhance.py).
+
+> So in a nutshil, PaddleGAN Wav2lip = Wav2lip + face enhancement
+
+### How to run
+* Follow the same instructions provided above.
+* Install PaddlePaddle [follow here](https://github.com/PaddlePaddle/PaddleGAN/blob/develop/docs/zh_CN/install.md)
+```shell
+    # CUDA10.1
+    $ python -m pip install paddlepaddle-gpu==2.1.0.post101 -f https://mirror.baidu.com/pypi/simple
+    # CPU
+    $ python -m pip install paddlepaddle -i https://mirror.baidu.com/pypi/simple
+```
+* Execute
+```shell
+    $ cd applications
+
+    $ python tools/wav2lip.py \
+        --face ../docs/imgs/mona7s.mp4 \
+        --audio ../docs/imgs/guangquan.m4a \
+        --outfile pp_guangquan_mona7s.mp4 \
+        --face_enhancement
+```
+> mona7s.mp4 and guangquan.m4a exist already in the repo.
+> face_enhancement will automatically download the model produced by paddlegan **(270+ MB)**
+
+## Issues On PaddleGAN wav2lip
+
+### numpy package
+```python3 
+    RuntimeError: module compiled against API version 0xe but this version of numpy is 0xd
+```
+### Sol
+* Upgrade package (solved)
+```shell
+    $ pip install numpy --upgrade
+```
+
+conda install -c anaconda cudnn
+
+python3 tools/wav2lip.py  --face ../docs/imgs/mona7s.mp4 --audio ../docs/imgs/guangquan.m4a  --outfile pp_guangquan_mona7s.mp4 
