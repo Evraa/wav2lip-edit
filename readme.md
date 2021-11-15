@@ -69,6 +69,7 @@ Getting the weights
 > You may use parameters provided by the authors such as --box, --nosmoot ..etc. We'll discuss some of them in the following subsection:
 
 * *--box:* To exclude the `s3fd` face detector model and manually locate the face within the video/image. Works better in case of images to save time. But authors forgot to implement it for images, so I did it in the modified version in this repo.
+> Provided that when using box parameter, to store an image with the box on it. Try it out.
 * *--crop:* To crop the image and work on a smaller scale.
 * *--nosmooth:* Proved to show better results. Recommended.
 * *--fps:* Doesn't provide its intended job, so I implemented it within the code.
