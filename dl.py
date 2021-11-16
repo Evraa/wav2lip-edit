@@ -32,9 +32,13 @@ def save_response_content(response, destination):
 print ("Pick one of these two models:\n0-wav2lip_gan.pth\n1-wav2lip.pth")
 ans = int (input(">>"))
 if ans == 0:
-    id = '1jQOJInh8cDj2mrbUgcQxhCc7rpAgyV1-'
-    destination = 'Wav2lip/checkpoints/wav2lip_gan.pth'
+    # id = '1jQOJInh8cDj2mrbUgcQxhCc7rpAgyV1-'
+    # destination = 'Wav2lip/checkpoints/wav2lip_gan.pth'
+    id="1Cbslsy6oeBCWG5rgT2HBIY4wFg-ZywkH"
+    destination="islam_vid.mp4"
 elif ans == 1:
-    id = '1ws1Ftl2nMMjRp7kEbnb9th6CdHTIsHjK'
-    destination = "Wav2lip/checkpoints/wav2lip.pth"
+    # id = '1ws1Ftl2nMMjRp7kEbnb9th6CdHTIsHjK'
+    # destination = "Wav2lip/checkpoints/wav2lip.pth"
+    id = "13iWjtfMtG93vlsPHKEGLDzyT3DkjYChd"
+    destination="islam_audio.wav"
 download_file_from_google_drive(id, destination)
